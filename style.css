@@ -1,0 +1,146 @@
+/* BASE */
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: #fefaf4 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  color: #2c1d0d;
+}
+
+h1, h2, h3 {
+  font-family: 'Georgia', serif;
+  color: #3d2b1f;
+  margin-bottom: 10px;
+}
+
+p, ul, ol {
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+ul, ol {
+  margin-left: 20px;
+}
+
+/* NAVIGATION */
+nav {
+  background-color: #3d2b1f;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 3px solid #cabfa5;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: #fdf3e7;
+  margin: 0 12px;
+  font-size: 16px;
+  padding: 8px 12px;
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+nav button:hover {
+  background-color: #58422b;
+}
+
+/* SECTIONS */
+section {
+  display: none;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: rgba(255, 255, 240, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+section.active {
+  display: block;
+}
+
+section h2 {
+  border-bottom: 2px solid #cabfa5;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+/* CANVAS & CONTROLS */
+canvas {
+  border: 1px solid #ccc;
+  margin: 20px 0;
+  background: white;
+}
+
+.controls {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.controls label {
+  margin-right: 10px;
+}
+
+.controls input {
+  padding: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  width: 60px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+/* EXAMPLES */
+.example {
+  margin-bottom: 30px;
+  padding: 10px;
+  border-left: 4px solid #cabfa5;
+  background-color: #fdf9f2;
+}
+
+/* FOOTER */
+#credits a {
+  color: #3d2b1f;
+  text-decoration: underline;
+}
+
+#credits a:hover {
+  text-decoration: none;
+}
+
+.ops-block {
+    margin: 40px auto;
+    padding: 20px;
+    background: #fdf9f2;
+    border-left: 5px solid #cabfa5;
+    border-radius: 8px;
+    max-width: 800px;
+  }
+  
+  .canvas-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .canvas-row div {
+    text-align: center;
+  }
+  
+  .canvas-row canvas {
+    border: 1px solid #ccc;
+    background: white;
+  }
+  
+  .caption {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    margin-top: 8px;
+  }
+  
