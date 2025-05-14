@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Le Nombre comme Empreinte – Codex Chronoforme</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <button onclick="showSection('contexte')">1. Contexte</button>
+    <button onclick="showSection('symboles')">2. Symboles</button>
+    <button onclick="showSection('regles')">3. Règles</button>
+    <button onclick="showSection('exemples')">4. Exemples</button>
+    <button onclick="showSection('operations')">5. Opérations</button>
+    <button onclick="showSection('tracer')">6. Tracer</button>
+  </nav>
+
+  <!-- 1. CONTEXTE -->
+  <section id="contexte" class="active">
+    <h1>1. Contexte d’utilisation</h1>
+    <p>
+      Sur les Hautes Plaines d’Aeyria, les <strong>Chronoformes</strong> sont des
+      <em>scribes-constructeurs</em> qui n’ont jamais adopté les chiffres tels que nous les connaissons.
+      Pour eux, chaque quantité est une <strong>empreinte visuelle</strong> : 
+      un chemin tracé entre des sites sacrés sur une grille géométrique.
+    </p>
+    <p>
+      Ils emploient cette notation pour :
+    </p>
+    <ul>
+      <li><strong>Archiver les échanges</strong> de marchandises sans laisser de trace numérique abstraite.</li>
+      <li><strong>Inscrire les rituels</strong> et les <em>cycles lunaires</em> dans leurs manuscrits sacrés.</li>
+      <li><strong>Coder l’architecture</strong> de leurs temples, où chaque motif est un calendrier gravé.</li>
+    </ul>
+    <p>
+      Ce système les relie au monde visuel et rituel : <em>compter n’est pas écrire, c’est tracer un parcours.</em>
+    </p>
+  </section>
+
+  <!-- 2. SYMBOLES -->
+  <section id="symboles">
+    <h1>2. Les symboles utilisés</h1>
+    <p>
+      Les nombres sont représentés uniquement par :
+    </p>
+    <ul>
+      <li>Une <strong>grille carrée</strong> de taille <code>G×G</code> (souvent 3×3, 4×4, 6×6, 12×12).</li>
+      <li><strong>N points fixes</strong> placés sur des cases significatives 
+        (coins, milieux de côtés, centre, puis subdivisions régulières).</li>
+      <li>Une <strong>ligne continue</strong> qui relie ces points dans un <em>ordre précis</em>.</li>
+    </ul>
+    <p>
+      <strong>Aucun</strong> caractère numérique, <strong>aucune</strong> base positionnelle, 
+      <strong>pas de zéro</strong>. Le symbole d’un nombre est la figure elle-même.
+    </p>
+    <figure>
+      <img src="assets/exemple-3x3.png" alt="Exemple grille 3x3 et points A,E,I" />
+      <figcaption>Grille 3×3 avec 3 points (A, E, I) choisis. Chaque combinaison forme un tracé unique.</figcaption>
+    </figure>
+  </section>
+
+  <section id="tracer">
+    <h2>Tracer un nombre</h2>
+    <p>
+      Choisissez une taille de grille et un rang k. Le système tracera la figure correspondant à la kᵉ permutation de N points.
+    </p>
+  
+    <div class="controls">
+      <label>Taille de la grille (G) :</label>
+      <input type="number" id="gridSize" value="4" min="1" onchange="updateSchema()" />
+      <label>Rang (k) :</label>
+      <input type="number" id="rank" value="1" min="1" onchange="updateSchema()" />
+      <button onclick="updateSchema()">Tracer</button>
+    </div>
+  
+    <canvas id="canvas" width="400" height="400"></canvas>
+  </section>
+  
+
+  <!-- 3. RÈGLES -->
+  <section id="regles">
+    <h1>3. Règles de fonctionnement</h1>
+    <ol>
+      <li>
+        <strong>Choix de N</strong> : on détermine le nombre de points pour couvrir la plage désirée
+        (N! ≥ nombre max à coder).
+      </li>
+      <li>
+        <strong>Priorisation des cases</strong> :
+        coins → milieux de côtés → centre → quartiles → tiers → etc.
+      </li>
+      <li>
+        <strong>Liste des permutations</strong> : 
+        on classe tous les ordres possibles (N!) en <em>ordre lexicographique</em>.
+      </li>
+      <li>
+        <strong>Codage</strong> : la kᵉ permutation de la liste correspond au nombre k.
+      </li>
+      <li>
+        <strong>Traçage</strong> : on place un point dans chaque case choisie et on relie dans l’ordre.
+      </li>
+      <li>
+        <strong>Décodage</strong> : on lit l’ordre des points parcourus, on calcule son rang
+        (méthode factoradique) → on retrouve k.
+      </li>
+    </ol>
+    <p>
+      Ce procédé assure un système à la fois <em>réversible</em>, <em>scalable</em> et
+      <em>entièrement graphique</em>.
+    </p>
+  </section>
+
+  <!-- 4. EXEMPLES -->
+  <section id="exemples">
+    <h1>4. Exemples de nombres notés</h1>
+
+    <!-- Exemple 1 : 3x3 -->
+    <div class="example">
+      <h2>Grille 3×3, N=3</h2>
+      <p>Points : A=(1,1), E=(2,2), I=(3,3)</p>
+      <ul>
+        <li>k = 1 → A → E → I</li>
+        <li>k = 2 → A → I → E</li>
+        <li>k = 6 → I → E → A</li>
+      </ul>
+      <canvas data-grid="3" data-rank="1" width="200" height="200"></canvas>
+      <canvas data-grid="3" data-rank="2" width="200" height="200"></canvas>
+      <canvas data-grid="3" data-rank="6" width="200" height="200"></canvas>
+    </div>
+
+    <!-- Exemple 2 : 4x4 -->
+    <div class="example">
+      <h2>Grille 4×4, N=4 (coins)</h2>
+      <p>Points : A=(1,1), B=(1,4), C=(4,1), D=(4,4)</p>
+      <ul>
+        <li>k = 8 → B → A → D → C</li>
+        <li>k = 12 → C → D → B → A</li>
+        <li>k = 24 → D → C → B → A</li>
+      </ul>
+      <canvas data-grid="4" data-rank="8" width="200" height="200"></canvas>
+      <canvas data-grid="4" data-rank="12" width="200" height="200"></canvas>
+      <canvas data-grid="4" data-rank="24" width="200" height="200"></canvas>
+    </div>
+
+    <!-- Exemple 3 : 12x12 -->
+    <div class="example">
+      <h2>Grille 12×12, N=12</h2>
+      <p>Choix de 12 points répartis : coins, milieux, centre, quartiles, tiers…</p>
+      <ul>
+        <li>k = 1 → parcours simple (coins → centre)</li>
+        <li>k = 40 → motif asymétrique (figure complexe)</li>
+        <li>k = 1600 → trajet riche en détours</li>
+      </ul>
+      <canvas data-grid="12" data-rank="1" width="200" height="200"></canvas>
+      <canvas data-grid="12" data-rank="40" width="200" height="200"></canvas>
+      <canvas data-grid="12" data-rank="1600" width="200" height="200"></canvas>
+    </div>
+  </section>
+
+  <!-- 5. OPERATIONS -->
+  <section id="operations">
+    <h1>5. Trois opérations arithmétiques</h1>
+  
+    <!-- ADDITION -->
+    <div class="ops-block">
+      <h2>➕ Addition (composition)</h2>
+      <p>
+        On compose deux parcours P et Q (on applique Q puis P).  
+        <br><strong>Ex.</strong> P(k₁ = 3) + Q(k₂ = 5) = P∘Q = rang 8
+      </p>
+      <div class="canvas-row">
+        <div>
+          <canvas id="canvas-op1" width="200" height="200"></canvas>
+          <p class="caption">P (rang 3)</p>
+        </div>
+        <div>
+          <canvas id="canvas-op2" width="200" height="200"></canvas>
+          <p class="caption">Q (rang 5)</p>
+        </div>
+        <div>
+          <canvas id="canvas-op3" width="200" height="200"></canvas>
+          <p class="caption">P∘Q (rang 8)</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- MULTIPLICATION -->
+    <div class="ops-block">
+      <h2>✖️ Multiplication (répétition)</h2>
+      <p>
+        On répète un même tracé plusieurs fois, décalé à chaque fois.  
+        <br><strong>Ex.</strong> P(rang 4) répété 3 fois avec décalage.
+      </p>
+      <div class="canvas-row">
+        <div>
+          <canvas id="canvas-mult-base" width="200" height="200"></canvas>
+          <p class="caption">P (rang 4)</p>
+        </div>
+        <div>
+          <canvas id="canvas-mult-repeat" width="200" height="200"></canvas>
+          <p class="caption">Répétition ×3</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- INVERSION -->
+    <div class="ops-block">
+      <h2>↩️ Inversion (soustraction)</h2>
+      <p>
+        On inverse l’ordre du parcours : rang inversé = <code>N! + 1 − k</code>.  
+        <br><strong>Ex.</strong> N = 4, k = 8 → 24 + 1 − 8 = 17.
+      </p>
+      <div class="canvas-row">
+        <div>
+          <canvas id="canvas-inv-base" width="200" height="200"></canvas>
+          <p class="caption">P (rang 8)</p>
+        </div>
+        <div>
+          <canvas id="canvas-inv-inverse" width="200" height="200"></canvas>
+          <p class="caption">Inversé (rang 17)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+
+  <!-- JAVASCRIPT GLOBAL -->
+  <script src="script.js"></script>
+  <script>
+    // Contrôle des sections
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  
+    // Initialisation des canvases au chargement
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tracés automatiques simples
+      document.querySelectorAll('canvas[data-grid]').forEach(c => {
+        const G = +c.dataset.grid, k = +c.dataset.rank;
+        drawCanvas(c, G, k);
+      });
+  
+      // ➕ Composition : P=3, Q=5 sur 4x4 → P∘Q
+      drawCanvas(document.getElementById('canvas-op1'), 4, 3);
+      drawCanvas(document.getElementById('canvas-op2'), 4, 5);
+      const P = permutationFromRank(4, 3);
+      const Q = permutationFromRank(4, 5);
+      const comp = Q.map(i => P[i]);
+      const rankComp = permutationToRank(comp);
+      drawCanvas(document.getElementById('canvas-op3'), 4, rankComp);
+  
+      // 🔁 Multiplication : P=4 répété 3 fois avec décalage
+      const cmult = document.getElementById('canvas-mult-repeat');
+      const ctxM = cmult.getContext("2d");
+      const G = 4;
+      const W = cmult.width;
+      const cell = W / G;
+      ctxM.clearRect(0, 0, W, W);
+      const points = getPriorityPoints(G, G);
+      const basePerm = permutationFromRank(G, 4);
+      // grille
+      ctxM.strokeStyle = "#ddd";
+      for (let i = 0; i <= G; i++) {
+        ctxM.beginPath(); ctxM.moveTo(i * cell, 0); ctxM.lineTo(i * cell, W); ctxM.stroke();
+        ctxM.beginPath(); ctxM.moveTo(0, i * cell); ctxM.lineTo(W, i * cell); ctxM.stroke();
+      }
+      // répétition
+      ctxM.strokeStyle = "#000";
+      ctxM.lineWidth = 2;
+      for (let t = 0; t < 3; t++) {
+        const offset = t * 10;
+        const pts = basePerm.map(i => points[i]);
+        ctxM.beginPath();
+        pts.forEach(([x, y], i) => {
+          const px = (y - 0.5) * cell + offset;
+          const py = (x - 0.5) * cell + offset;
+          if (i === 0) ctxM.moveTo(px, py);
+          else ctxM.lineTo(px, py);
+        });
+        ctxM.stroke();
+      }
+      drawCanvas(document.getElementById('canvas-mult-base'), G, 4);
+  
+      // ↩️ Inversion : P = 8 → inversé = 24 + 1 − 8 = 17
+      drawCanvas(document.getElementById('canvas-inv-base'), 4, 8);
+      drawCanvas(document.getElementById('canvas-inv-inverse'), 4, 17);
+    });
+  
+    // Fonctions existantes
+    function factorial(n) { let r = 1; for (let i = 2; i <= n; i++) r *= i; return r; }
+  
+    function permutationFromRank(n, k) {
+      let seq = [...Array(n).keys()], r = k - 1, perm = [];
+      for (let i = n; i > 0; i--) {
+        let f = factorial(i - 1);
+        let idx = Math.floor(r / f);
+        perm.push(seq.splice(idx, 1)[0]);
+        r %= f;
+      }
+      return perm;
+    }
+  
+    function permutationToRank(perm) {
+      let rank = 0, n = perm.length, avail = [...Array(n).keys()];
+      perm.forEach((p, i) => {
+        const idx = avail.indexOf(p);
+        rank += idx * factorial(n - i - 1);
+        avail.splice(idx, 1);
+      });
+      return rank + 1;
+    }
+  
+    function getPriorityPoints(G, limit) {
+      const mid = Math.ceil(G / 2), q1 = Math.floor(G / 4), q3 = Math.ceil(3 * G / 4);
+      const t1 = Math.floor(G / 3), t2 = Math.ceil(2 * G / 3);
+      const pts = [[1, 1], [1, G], [G, 1], [G, G], [1, mid], [mid, 1], [G, mid], [mid, G]];
+      if (G % 2) pts.push([mid, mid]);
+      [[q1, q1], [q1, q3], [q3, q1], [q3, q3], [t1, t1], [t1, t2], [t2, t1], [t2, t2]].forEach(p => pts.push(p));
+      for (let x = 1; pts.length < limit && x <= G; x++) {
+        for (let y = 1; y <= G; y++) {
+          if (!pts.some(pt => pt[0] === x && pt[1] === y)) pts.push([x, y]);
+          if (pts.length >= limit) break;
+        }
+      }
+      return pts.slice(0, limit);
+    }
+  
+    function drawCanvas(canvas, G, k) {
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const cell = W / G;
+      ctx.clearRect(0, 0, W, W);
+      const pts = getPriorityPoints(G, G);
+      const fact = factorial(pts.length);
+      if (k < 1 || k > fact) return;
+      const perm = permutationFromRank(pts.length, k);
+      const ppts = perm.map(i => pts[i]);
+  
+      // Grille
+      ctx.strokeStyle = "#ddd";
+      for (let i = 0; i <= G; i++) {
+        ctx.beginPath(); ctx.moveTo(i * cell, 0); ctx.lineTo(i * cell, W); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, i * cell); ctx.lineTo(W, i * cell); ctx.stroke();
+      }
+  
+      // Tracé
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ppts.forEach((p, i) => {
+        const x = (p[1] - 0.5) * cell;
+        const y = (p[0] - 0.5) * cell;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+  
+      // Points
+// points (1er en bleu, les autres en rouge)
+      ppts.forEach((p, i) => {
+        const x = (p[1] - 0.5) * cell;
+        const y = (p[0] - 0.5) * cell;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = (i === 0) ? '#0066cc' : '#cc0000';
+        ctx.fill();
+      });
+
+    }
+  </script>
+<script>
+  function factorial(n) {
+    let res = 1;
+    for (let i = 2; i <= n; i++) res *= i;
+    return res;
+  }
+
+  function permutationFromRank(n, k) {
+    let seq = [...Array(n).keys()];
+    k -= 1;
+    const perm = [];
+    for (let i = n; i > 0; i--) {
+      let f = factorial(i - 1);
+      let idx = Math.floor(k / f);
+      perm.push(seq.splice(idx, 1)[0]);
+      k %= f;
+    }
+    return perm;
+  }
+
+  function getPriorityPoints(G, limit) {
+    const mid = Math.ceil(G / 2);
+    const q1 = Math.floor(G / 4);
+    const q3 = Math.ceil(3 * G / 4);
+    const t1 = Math.floor(G / 3);
+    const t2 = Math.ceil(2 * G / 3);
+    const points = [];
+
+    points.push([1, 1], [1, G], [G, 1], [G, G]);
+    points.push([1, mid], [mid, 1], [G, mid], [mid, G]);
+    if (G % 2 !== 0) points.push([mid, mid]);
+    points.push([q1, q1], [q1, q3], [q3, q1], [q3, q3]);
+    points.push([t1, t1], [t1, t2], [t2, t1], [t2, t2]);
+
+    for (let x = 1; points.length < limit && x <= G; x++) {
+      for (let y = 1; y <= G; y++) {
+        if (!points.some(([a, b]) => a === x && b === y)) {
+          points.push([x, y]);
+        }
+        if (points.length >= limit) break;
+      }
+    }
+    return points.slice(0, limit);
+  }
+
+  function drawSchema(G, k) {
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const cellSize = canvas.width / G;
+    const points = getPriorityPoints(G, G);
+    const fact = factorial(points.length);
+    if (k < 1 || k > fact) {
+      alert(`k doit être entre 1 et ${fact}`);
+      return;
+    }
+
+    const perm = permutationFromRank(points.length, k);
+    const permPoints = perm.map(i => points[i]);
+
+    // Grille
+    ctx.strokeStyle = "#ddd";
+    for (let i = 0; i <= G; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * cellSize, 0);
+      ctx.lineTo(i * cellSize, canvas.height);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(0, i * cellSize);
+      ctx.lineTo(canvas.width, i * cellSize);
+      ctx.stroke();
+    }
+
+    // Tracé du chemin
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    permPoints.forEach(([x, y], index) => {
+      const px = (y - 0.5) * cellSize;
+      const py = (x - 0.5) * cellSize;
+      if (index === 0) {
+        ctx.moveTo(px, py);
+      } else {
+        ctx.lineTo(px, py);
+      }
+    });
+    ctx.stroke();
+
+    // Points (bleu pour départ, rouge pour les suivants)
+    permPoints.forEach(([x, y], index) => {
+      const px = (y - 0.5) * cellSize;
+      const py = (x - 0.5) * cellSize;
+      ctx.beginPath();
+      ctx.arc(px, py, 5, 0, 2 * Math.PI);
+      ctx.fillStyle = (index === 0) ? "#0066cc" : "#cc0000";
+      ctx.fill();
+    });
+
+    // Légende
+    ctx.fillStyle = "black";
+    ctx.font = "16px Arial";
+    ctx.fillText(`Grille ${G}×${G}, k=${k}`, 10, 20);
+  }
+
+  function updateSchema() {
+    const G = parseInt(document.getElementById("gridSize").value);
+    const k = parseInt(document.getElementById("rank").value);
+    drawSchema(G, k);
+  }
+
+  // Lancement initial
+  updateSchema();
+</script>
+ 
+</body>
+</html>
