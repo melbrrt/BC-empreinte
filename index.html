@@ -21,21 +21,28 @@
   <section id="contexte" class="active">
     <h1>1. Contexte d’utilisation</h1>
     <p>
-      Sur les Hautes Plaines d’Aeyria, les <strong>Chronoformes</strong> sont des
-      <em>scribes-constructeurs</em> qui n’ont jamais adopté les chiffres tels que nous les connaissons.
-      Pour eux, chaque quantité est une <strong>empreinte visuelle</strong> : 
-      un chemin tracé entre des sites sacrés sur une grille géométrique.
+      Les <strong>Quadragraphes</strong> sont un groupe de <em>constructeurs</em>. 
+      Plutôt que d’employer des chiffres, ils <strong>tracent des parcours</strong> sur des grilles pour représenter chaque quantité.
     </p>
     <p>
-      Ils emploient cette notation pour :
+      Pour eux, <strong>le tracé est la donnée</strong>, et le choix de la grille suit une règle claire : l’<strong>Échelon de Cadre</strong>.  
+      Selon l’importance de l’information, on sélectionne un niveau d’Échelon qui détermine directement la taille de la grille et le nombre de points à lier :
     </p>
     <ul>
-      <li><strong>Archiver les échanges</strong> de marchandises sans laisser de trace numérique abstraite.</li>
-      <li><strong>Inscrire les rituels</strong> et les <em>cycles lunaires</em> dans leurs manuscrits sacrés.</li>
-      <li><strong>Coder l’architecture</strong> de leurs temples, où chaque motif est un calendrier gravé.</li>
+      <li><strong>Échelon 1</strong> (grille <code>3×3</code>) : pour les échanges du quotidien (quelques pièces, denrées de base).</li>
+      <li><strong>Échelon 2</strong> (grille <code>4×4</code>) : pour les comptes de village (budget des fêtes, impôts locaux).</li>
+      <li><strong>Échelon 3</strong> (grille <code>6×6</code>) : pour les grands projets (construction de temples, routes commerciales).</li>
+      <li><strong>Échelon 4</strong> (grille <code>12×12</code>) : pour les archives royales.</li>
     </ul>
     <p>
-      Ce système les relie au monde visuel et rituel : <em>compter n’est pas écrire, c’est tracer un parcours.</em>
+      Au‑delà de l’Échelon 4, on n’utilise plus que la <strong>parité</strong> de la grille (pair ou impair) :
+    </p>
+    <ul>
+      <li><strong>Impaire</strong> : &laquo; cadre centré &raquo; pour marquer un événement unique ou un contrat majeur.</li>
+      <li><strong>Pair</strong> : &laquo; cadre double &raquo; pour illustrer un flux ou un processus cyclique.</li>
+    </ul>
+    <p>
+      Cette convention garantit que <strong>tout lecteur</strong> sait instantanément l’échelle et la fonction d’un document simplement en voyant la taille (ou la parité) de la grille, sans jamais recourir à des signes abstraits.
     </p>
   </section>
 
@@ -43,22 +50,27 @@
   <section id="symboles">
     <h1>2. Les symboles utilisés</h1>
     <p>
-      Les nombres sont représentés uniquement par :
+      Les nombres sont représentés uniquement par :
     </p>
-    <ul>
-      <li>Une <strong>grille carrée</strong> de taille <code>G×G</code> (souvent 3×3, 4×4, 6×6, 12×12).</li>
-      <li><strong>N points fixes</strong> placés sur des cases significatives 
-        (coins, milieux de côtés, centre, puis subdivisions régulières).</li>
-      <li>Une <strong>ligne continue</strong> qui relie ces points dans un <em>ordre précis</em>.</li>
-    </ul>
+    <ol>
+      <li><strong>Une grille carrée G×G</strong> (par exemple <code>3×3</code>, <code>4×4</code>, <code>6×6</code>, <code>12×12</code>).</li>
+      <li>
+        <strong>N points fixes</strong> placés sur des cases significatives :
+        <ul>
+          <li>les <em>coins</em> (extrémités les plus visibles),</li>
+          <li>les <em>milieux des côtés</em> (points structurants),</li>
+          <li>le <em>centre</em>,</li>
+          <li>et d’autres emplacements réguliers (quartiles, tiers, etc.).</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Une ligne continue</strong> qui relie ces points dans un ordre précis, formant une figure unique.
+      </li>
+    </ol>
+  
     <p>
-      <strong>Aucun</strong> caractère numérique, <strong>aucune</strong> base positionnelle, 
-      <strong>pas de zéro</strong>. Le symbole d’un nombre est la figure elle-même.
+      <strong>Pas de zéro</strong>, <strong>pas de base</strong> : le tracé lui-même est le nombre.
     </p>
-    <figure>
-      <img src="assets/exemple-3x3.png" alt="Exemple grille 3x3 et points A,E,I" />
-      <figcaption>Grille 3×3 avec 3 points (A, E, I) choisis. Chaque combinaison forme un tracé unique.</figcaption>
-    </figure>
   </section>
 
   <section id="tracer">
@@ -81,35 +93,129 @@
 
   <!-- 3. RÈGLES -->
   <section id="regles">
-    <h1>3. Règles de fonctionnement</h1>
-    <ol>
-      <li>
-        <strong>Choix de N</strong> : on détermine le nombre de points pour couvrir la plage désirée
-        (N! ≥ nombre max à coder).
-      </li>
-      <li>
-        <strong>Priorisation des cases</strong> :
-        coins → milieux de côtés → centre → quartiles → tiers → etc.
-      </li>
-      <li>
-        <strong>Liste des permutations</strong> : 
-        on classe tous les ordres possibles (N!) en <em>ordre lexicographique</em>.
-      </li>
-      <li>
-        <strong>Codage</strong> : la kᵉ permutation de la liste correspond au nombre k.
-      </li>
-      <li>
-        <strong>Traçage</strong> : on place un point dans chaque case choisie et on relie dans l’ordre.
-      </li>
-      <li>
-        <strong>Décodage</strong> : on lit l’ordre des points parcourus, on calcule son rang
-        (méthode factoradique) → on retrouve k.
-      </li>
-    </ol>
+    <h2>3. Règles de fonctionnement</h2>
+
+    <!-- a) Choisir la taille de la grille -->
+    <h3>a) Choisir la taille de la grille avec l’Échelon de Cadre</h3>
     <p>
-      Ce procédé assure un système à la fois <em>réversible</em>, <em>scalable</em> et
-      <em>entièrement graphique</em>.
+      Les Quadragraphes utilisent l’<strong>Échelon de Cadre</strong> pour déterminer la taille de la grille (G×G)  
+      en fonction de l’importance de l’information à noter. Chaque échelon a une taille et un nombre de points (<em>N</em>) spécifiques :
     </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Échelon</th>
+          <th>Usage</th>
+          <th>Grille G×G</th>
+          <th>N points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Petits échanges du quotidien</td>
+          <td>3×3</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Comptes de village</td>
+          <td>4×4</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Grands projets (temples, routes)</td>
+          <td>6×6</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Archives royales et calendriers</td>
+          <td>12×12</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Comment ça marche ?</strong><br>
+      1. On choisit l’Échelon selon l’échelle de l’information à coder.<br>
+      2. On garde la même grille dans tout le document pour que ce soit plus lisible et cohérent.<br>
+      3. On place <em>N</em> points sur la grille, en suivant un ordre précis (coins, bords, centre, puis autres points importants).
+    </p>
+  
+    <!-- b) Placer les points -->
+    <h3>b) Placer les points (priorisation)</h3>
+    <p>
+      Une fois la grille choisie, il faut décider où placer les <em>N</em> points. Les Quadragraphes suivent cette hiérarchie :
+    </p>
+    <ul>
+      <li><strong>Coins</strong> (extrémités les plus visibles)</li>
+      <li><strong>Milieux des côtés</strong> (symétrie horizontale et verticale)</li>
+      <li><strong>Centre</strong> (si la grille est impaire)</li>
+      <li><strong>Quartiles, tiers, etc.</strong> pour les plus grandes grilles</li>
+    </ul>
+    <p>
+      L’idée est de prioriser les emplacements les plus structurants de la grille pour rendre les tracés plus lisibles et mémorables.
+    </p>
+  
+    <!-- c) Coder un nombre -->
+    <h3>c) Coder un nombre (tracé)</h3>
+    <ol>
+      <li>On <strong>liste toutes les permutations</strong> possibles de ces <em>N</em> points (c’est‑à‑dire tous les ordres possibles).</li>
+      <li>On classe ces permutations dans un <strong>ordre fixe</strong>.</li>
+      <li>On associe chaque permutation à un entier <em>k</em>, en numérotant simplement les permutations à partir de 1.</li>
+      <li>Le nombre <em>k</em> est donc représenté par la <strong>kᵉ permutation</strong> de cette liste, que l’on trace sur la grille.</li>
+    </ol>
+  
+    <!-- d) Décoder un tracé -->
+    <h3>d) Décoder un tracé (lecture)</h3>
+    <p>
+      Pour lire un tracé et retrouver le nombre correspondant :
+    </p>
+    <ol>
+      <li>On identifie l’ordre exact des points parcourus.</li>
+      <li>On cherche cet ordre dans la liste des permutations pour retrouver le rang <em>k</em> du tracé.</li>
+      <li>On note ce rang <em>k</em> comme le nombre représenté.</li>
+    </ol>
+  
+    <!-- e) Limites et parité des grandes grilles -->
+    <h3>e) Limites et parité des grandes grilles</h3>
+    <p>
+      Les Quadragraphes n’utilisent jamais de grilles plus grandes que 19×19 pour des raisons pratiques :
+    </p>
+    <ul>
+      <li>Au-delà de 20×20, ils considèrent que seule la <strong>parité</strong> est importante.</li>
+      <li>Ils distinguent donc simplement entre :
+        <ul>
+          <li><strong>Grille impaire</strong> : « cadre centré » (contient un centre exact)</li>
+          <li><strong>Grille paire</strong> : « cadre double » (n’a pas de centre précis)</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Cela suffit à classer ces grandes grilles sans avoir à spécifier la dimension exacte (22×22, 24×24, etc.).
+    </p>
+  
+    <!-- f) Particularités des tracés selon la taille de la grille -->
+    <h3>f) Particularités des tracés selon la taille de la grille</h3>
+    <p>
+      Chaque entier est un parcours unique sur une grille (sans base, sans zéro, sans caractère numérique),  
+      ce qui fait de l'Empreinte Quadragraphe un système vraiment spécial :
+    </p>
+    <ul>
+      <li><strong>Graphique</strong> : chaque nombre est un tracé continu, visible et reconnaissable.</li>
+      <li><strong>Non‑positionnel</strong> : la valeur d’une case n’a pas d’importance ; seul compte l’ordre dans lequel on parcourt les points.</li>
+      <li><strong>Permutation‑based</strong> : on utilise la kᵉ permutation des points, ce qui rappelle la logique factorielle, mais transposée en dessin.</li>
+    </ul>
+    <p>
+      <strong>Note</strong> : un même nombre n’est pas dessiné de la même façon selon la taille de la grille,  
+      car chaque Échelon de Cadre définit un ensemble différent de points. Par exemple :
+    </p>
+    <ul>
+      <li>La 1ʳᵉ permutation sur une grille 4×4 relie typiquement quatre coins.</li>
+      <li>Le « 1 » de chaque Échelon reste toujours la première permutation, mais les points de départ et d’arrivée varient, d’où des formes distinctes.</li>
+    </ul>
   </section>
 
   <!-- 4. EXEMPLES -->
@@ -119,11 +225,26 @@
     <!-- Exemple 1 : 3x3 -->
     <div class="example">
       <h2>Grille 3×3, N=3</h2>
-      <p>Points : A=(1,1), E=(2,2), I=(3,3)</p>
+      <p>
+        Sur une grille <code>3×3</code>, on place 3 points comme suit :
+      </p>
       <ul>
-        <li>k = 1 → A → E → I</li>
-        <li>k = 2 → A → I → E</li>
-        <li>k = 6 → I → E → A</li>
+        <li>un point en haut à gauche (1,1),</li>
+        <li>un autre en haut à droite (1,3),</li>
+        <li>et un dernier en bas à gauche (3,1).</li>
+      </ul>
+      <p>
+        Il y a 3! = 6 façons différentes de relier ces 3 points :
+      </p>
+      <ul>
+        <li><strong>k = 1</strong> → de (1,1) à (1,3) à (3,1)</li>
+        <li><strong>k = 2</strong> → de (1,1) à (3,1) à (1,3)</li>
+        <li>…</li>
+        <li><strong>k = 6</strong> → de (3,1) à (1,3) à (1,1)</li>
+      </ul>
+      <p>
+        Chaque tracé est une ligne unique reliant ces trois cases, formant ainsi un nombre différent.
+      </p>
       </ul>
       <canvas data-grid="3" data-rank="1" width="200" height="200"></canvas>
       <canvas data-grid="3" data-rank="2" width="200" height="200"></canvas>
@@ -132,12 +253,25 @@
 
     <!-- Exemple 2 : 4x4 -->
     <div class="example">
-      <h2>Grille 4×4, N=4 (coins)</h2>
-      <p>Points : A=(1,1), B=(1,4), C=(4,1), D=(4,4)</p>
+      <h2>Grille 4×4, N=4</h2>
+      <p>
+        Sur une grille <code>4×4</code>, on place 4 points, par exemple aux quatre coins :
+      </p>
       <ul>
-        <li>k = 8 → B → A → D → C</li>
-        <li>k = 12 → C → D → B → A</li>
-        <li>k = 24 → D → C → B → A</li>
+        <li>(1,1) en haut à gauche</li>
+        <li>(1,4) en haut à droite</li>
+        <li>(4,1) en bas à gauche</li>
+        <li>(4,4) en bas à droite</li>
+      </ul>
+      <p>
+        Il y a 4! = 24 façons possibles de relier ces 4 points, comme :
+      </p>
+      <ul>
+        <li><strong>k = 8</strong> → (1,4) → (1,1) → (4,4) → (4,1)</li>
+        <li><strong>k = 12</strong> → (1,4) → (4,4) → (4,1) → (1,1)</li>
+        <li><strong>k = 24</strong> → (4,4) → (4,1) → (1,4) → (1,1)</li>
+      </ul>
+      <p>
       </ul>
       <canvas data-grid="4" data-rank="8" width="200" height="200"></canvas>
       <canvas data-grid="4" data-rank="12" width="200" height="200"></canvas>
@@ -147,11 +281,24 @@
     <!-- Exemple 3 : 12x12 -->
     <div class="example">
       <h2>Grille 12×12, N=12</h2>
-      <p>Choix de 12 points répartis : coins, milieux, centre, quartiles, tiers…</p>
+      <p>
+        Sur une grande grille <code>12×12</code>, on peut placer jusqu’à 12 points :
+      </p>
       <ul>
-        <li>k = 1 → parcours simple (coins → centre)</li>
-        <li>k = 40 → motif asymétrique (figure complexe)</li>
-        <li>k = 1600 → trajet riche en détours</li>
+        <li>aux quatre coins,</li>
+        <li>aux milieux des côtés,</li>
+        <li>au centre,</li>
+        <li>et sur des cases régulières réparties sur la grille.</li>
+      </ul>
+      <p>
+        Cela donne 12! = 479 001 600 tracés possibles, parmi lesquels :
+      </p>
+      <ul>
+        <li><strong>k = 1</strong> → un tracé simple, des coins vers le centre</li>
+        <li><strong>k = 40</strong> → un motif plus asymétrique</li>
+        <li><strong>k = 1600</strong> → un chemin plus complexe</li>
+      </ul>
+      <p>
       </ul>
       <canvas data-grid="12" data-rank="1" width="200" height="200"></canvas>
       <canvas data-grid="12" data-rank="40" width="200" height="200"></canvas>
@@ -165,33 +312,113 @@
   
     <!-- ADDITION -->
     <div class="ops-block">
-      <h2>➕ Addition (composition)</h2>
+      <h2> Fusion de tracés (addition culturelle)</h2>
       <p>
-        On compose deux parcours P et Q (on applique Q puis P).  
-        <br><strong>Ex.</strong> P(k₁ = 3) + Q(k₂ = 5) = P∘Q = rang 8
+        Chez les <em>Quadragraphes</em>, l’addition représente la <strong>tentative de fusion</strong> de deux projets, budgets, ou circuits importants pour la communauté.  
+        Cette fusion symbolise la coopération entre groupes ou villages, la mise en commun des ressources ou des plans.  
+        <br><br>
+        Cependant, la fusion n’est <strong>pas toujours possible</strong>. Lorsqu’elle échoue, c’est vu comme un signe rituel ou une protection culturelle indiquant que les projets sont incompatibles.  
+        Un refus de fusion signifie souvent la nécessité de renégocier ou de garder des séparations respectées.
       </p>
+    
+      <h3> Fusion réussie</h3>
       <div class="canvas-row">
         <div>
-          <canvas id="canvas-op1" width="200" height="200"></canvas>
-          <p class="caption">P (rang 3)</p>
+          <canvas id="canvas-fusion-p1" width="200" height="200"></canvas>
+          <p class="caption">Projet P (rang 3)</p>
         </div>
         <div>
-          <canvas id="canvas-op2" width="200" height="200"></canvas>
-          <p class="caption">Q (rang 5)</p>
+          <canvas id="canvas-fusion-q1" width="200" height="200"></canvas>
+          <p class="caption">Projet Q (rang 5)</p>
         </div>
         <div>
-          <canvas id="canvas-op3" width="200" height="200"></canvas>
-          <p class="caption">P∘Q (rang 8)</p>
+          <canvas id="canvas-fusion-res1" width="200" height="200"></canvas>
+          <p class="caption" id="fusion-res1-msg">Fusion approuvée par les anciens</p>
         </div>
       </div>
-    </div>
+    
+      <h3> Fusion refusée</h3>
+      <div class="canvas-row">
+        <div>
+          <canvas id="canvas-fusion-p2" width="200" height="200"></canvas>
+          <p class="caption">Projet P (rang 2)</p>
+        </div>
+        <div>
+          <canvas id="canvas-fusion-q2" width="200" height="200"></canvas>
+          <p class="caption">Projet Q (rang 3)</p>
+        </div>
+        <div>
+          <canvas id="canvas-fusion-res2" width="200" height="200"></canvas>
+          <p class="caption" id="fusion-res2-msg">Projet bloqué par conflit symbolique</p>
+        </div>
+      </div>
+    
+      <p>
+        <h3>Pourquoi certaines fusions fonctionnent et d'autres échouent</h3>
+  
+        <h4>Pourquoi la première fusion réussit (P = 3, Q = 5)</h4>
+        <ul>
+          <li><strong>Rangs et permutations :</strong></li>
+          <ul>
+            <li>P (rang 3) : <code>[0, 2, 1, 3]</code></li>
+            <li>Q (rang 5) : <code>[0, 3, 2, 1]</code></li>
+          </ul>
+          <li><strong>Composition par alternance des lignes :</strong></li>
+          <ul>
+            <li>Ligne 1 : <code>P[0] = 0</code></li>
+            <li>Ligne 2 : <code>Q[1] = 3</code></li>
+            <li>Ligne 3 : <code>P[2] = 1</code></li>
+            <li>Ligne 4 : <code>Q[3] = 2</code></li>
+          </ul>
+          <li><strong>Résultat :</strong> Séquence obtenue : <code>[0, 3, 1, 2]</code></li>
+          <li><strong>Vérification :</strong></li>
+          <ul>
+            <li>Cette permutation est <strong>complète</strong> car elle contient exactement chaque élément de l’ensemble <code>{0, 1, 2, 3}</code> une seule fois.</li>
+            <li>Pas de doublon, pas de point manquant.</li>
+            <li>Rang final : <code>5</code> (c’est la 5e permutation dans l’ordre lexicographique).</li>
+          </ul>
+        </ul>
+      
+        <h4>Pourquoi la deuxième fusion échoue (P = 2, Q = 3)</h4>
+        <ul>
+          <li><strong>Rangs et permutations :</strong></li>
+          <ul>
+            <li>P (rang 2) : <code>[0, 2, 1, 3]</code></li>
+            <li>Q (rang 3) : <code>[0, 2, 3, 1]</code></li>
+          </ul>
+          <li><strong>Composition par alternance des lignes :</strong></li>
+          <ul>
+            <li>Ligne 1 : <code>P[0] = 0</code></li>
+            <li>Ligne 2 : <code>Q[1] = 2</code></li>
+            <li>Ligne 3 : <code>P[2] = 1</code></li>
+            <li>Ligne 4 : <code>Q[3] = 1</code></li>
+          </ul>
+          <li><strong>Résultat :</strong> Séquence obtenue : <code>[0, 2, 1, 1]</code></li>
+          <li><strong>Vérification :</strong></li>
+          <ul>
+            <li>Cette séquence est <strong>incomplète</strong> :</li>
+            <li>Le <code>1</code> apparaît deux fois (ligne 3 et ligne 4).</li>
+            <li>Le <code>3</code> est totalement <strong>oublié</strong>.</li>
+            <li>Permutation <strong>déséquilibrée</strong> et <strong>invalide</strong>.</li>
+          </ul>
+          <li>Pour les Quadragraphes, cela symbolise un <strong>conflit rituel</strong> ou une <strong>incompatibilité culturelle</strong>, donc la fusion est refusée.</li>
+        </ul>
+      </div>
+
+      </p>
+      </div>
+        </div>
+        </div>
+      </div>
   
     <!-- MULTIPLICATION -->
     <div class="ops-block">
-      <h2>✖️ Multiplication (répétition)</h2>
+      <h2> Multiplication (répétition)</h2>
       <p>
         On répète un même tracé plusieurs fois, décalé à chaque fois.  
         <br><strong>Ex.</strong> P(rang 4) répété 3 fois avec décalage.
+        <strong>Usage chez les Quadragraphes :</strong> représenter une série d’événements récurrents,  
+        comme trois fêtes de saison, quatre distributions de grain, ou plusieurs passages de convoi sur une même route.
       </p>
       <div class="canvas-row">
         <div>
@@ -207,10 +434,13 @@
   
     <!-- INVERSION -->
     <div class="ops-block">
-      <h2>↩️ Inversion (soustraction)</h2>
+      <h2> Inversion (soustraction)</h2>
       <p>
         On inverse l’ordre du parcours : rang inversé = <code>N! + 1 − k</code>.  
         <br><strong>Ex.</strong> N = 4, k = 8 → 24 + 1 − 8 = 17.
+        <strong>Usage chez les Quadragraphes :</strong> représenter une réorganisation de fin d’année.  
+        Par exemple, si un tracé P est de rang 8 et représente des dépenses imprévues,  
+        son inversion (rang 17) peut indiquer un rééquilibrage des comptes pour compenser ces excès.
       </p>
       <div class="canvas-row">
         <div>
@@ -233,28 +463,59 @@
   <script>
     // Contrôle des sections
     function showSection(id) {
-      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Initialisation des canvases au chargement
+  document.addEventListener('DOMContentLoaded', () => {
+    // Tracés automatiques simples
+    document.querySelectorAll('canvas[data-grid]').forEach(c => {
+      const G = +c.dataset.grid, k = +c.dataset.rank;
+      drawCanvas(c, G, k);
+    });
+
+    // Fonction pour vérifier si une permutation est complète
+    function isCompletePermutation(arr, n) {
+      return arr.length === n && [...new Set(arr)].length === n && arr.every(e => e < n);
     }
-  
-    // Initialisation des canvases au chargement
-    document.addEventListener('DOMContentLoaded', () => {
-      // Tracés automatiques simples
-      document.querySelectorAll('canvas[data-grid]').forEach(c => {
-        const G = +c.dataset.grid, k = +c.dataset.rank;
-        drawCanvas(c, G, k);
-      });
-  
-      // ➕ Composition : P=3, Q=5 sur 4x4 → P∘Q
-      drawCanvas(document.getElementById('canvas-op1'), 4, 3);
-      drawCanvas(document.getElementById('canvas-op2'), 4, 5);
-      const P = permutationFromRank(4, 3);
-      const Q = permutationFromRank(4, 5);
-      const comp = Q.map(i => P[i]);
-      const rankComp = permutationToRank(comp);
-      drawCanvas(document.getElementById('canvas-op3'), 4, rankComp);
-  
-      // 🔁 Multiplication : P=4 répété 3 fois avec décalage
+
+    // Fusion par alternance
+    function fusionAlternance(P, Q) {
+      return P.map((_, i) => (i % 2 === 0 ? P[i] : Q[i]));
+    }
+
+    //  Exemples de fusions (une valide, une refusée)
+    const n = 4;
+
+    // Fusion réussie (P = 3, Q = 5)
+    const P1 = permutationFromRank(n, 3);
+    const Q1 = permutationFromRank(n, 5);
+    const fusion1 = fusionAlternance(P1, Q1);
+    if (isCompletePermutation(fusion1, n)) {
+      drawCanvas(document.getElementById('canvas-fusion-p1'), n, 3);
+      drawCanvas(document.getElementById('canvas-fusion-q1'), n, 5);
+      drawCanvas(document.getElementById('canvas-fusion-res1'), n, permutationToRank(fusion1));
+      document.getElementById('fusion-res1-msg').innerText = 'Fusion approuvée par les anciens';
+    } else {
+      document.getElementById('fusion-res1-msg').innerText = 'Fusion refusée';
+    }
+
+    // Fusion refusée (P = 2, Q = 3)
+    const P2 = permutationFromRank(n, 2);
+    const Q2 = permutationFromRank(n, 3);
+    const fusion2 = fusionAlternance(P2, Q2);
+    if (isCompletePermutation(fusion2, n)) {
+      drawCanvas(document.getElementById('canvas-fusion-p2'), n, 2);
+      drawCanvas(document.getElementById('canvas-fusion-q2'), n, 3);
+      drawCanvas(document.getElementById('canvas-fusion-res2'), n, permutationToRank(fusion2));
+      document.getElementById('fusion-res2-msg').innerText = 'Fusion approuvée par les anciens';
+    } else {
+      drawCanvas(document.getElementById('canvas-fusion-p2'), n, 2);
+      drawCanvas(document.getElementById('canvas-fusion-q2'), n, 3);
+      document.getElementById('fusion-res2-msg').innerText = 'Projet bloqué par conflit symbolique';
+    }
+      //  Multiplication : P=4 répété 3 fois avec décalage
       const cmult = document.getElementById('canvas-mult-repeat');
       const ctxM = cmult.getContext("2d");
       const G = 4;
@@ -286,7 +547,7 @@
       }
       drawCanvas(document.getElementById('canvas-mult-base'), G, 4);
   
-      // ↩️ Inversion : P = 8 → inversé = 24 + 1 − 8 = 17
+      //  Inversion : P = 8 → inversé = 24 + 1 − 8 = 17
       drawCanvas(document.getElementById('canvas-inv-base'), 4, 8);
       drawCanvas(document.getElementById('canvas-inv-inverse'), 4, 17);
     });
